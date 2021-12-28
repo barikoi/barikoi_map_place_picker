@@ -31,8 +31,11 @@ typedef PinBuilder = Widget Function(
 );
 
 class BarikoiMapPlacePicker extends StatelessWidget {
+
+
   const BarikoiMapPlacePicker({
     Key key,
+    @required this.apikey,
     @required this.initialTarget,
     @required this.appBarKey,
     this.selectedPlaceWidgetBuilder,
@@ -54,6 +57,7 @@ class BarikoiMapPlacePicker extends StatelessWidget {
     this.hidePlaceDetailsWhenDraggingPin,
   }) : super(key: key);
 
+  final String apikey;
   final LatLng initialTarget;
   final GlobalKey appBarKey;
 
@@ -134,7 +138,7 @@ class BarikoiMapPlacePicker extends StatelessWidget {
       CameraPosition initialCameraPosition = CameraPosition(target: initialTarget, zoom: 16);
       return MapboxMap(
 
-        styleString: "https://map.barikoi.com/styles/osm-liberty/style.json",
+        styleString: "https://map.barikoi.com/styles/osm-liberty/style.json?key="+this.apikey,
         initialCameraPosition:
          CameraPosition(target: initialTarget,zoom: 16),
         myLocationRenderMode: MyLocationRenderMode.NORMAL,
