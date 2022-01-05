@@ -26,7 +26,7 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: HEAD
+      ref: e73582a8682e639fbedb3ce53fdc1fb3da8afdf7
       resolved-ref: e73582a8682e639fbedb3ce53fdc1fb3da8afdf7
       url: "git://github.com/barikoi/barikoi_api_dartlib.git"
     source: git

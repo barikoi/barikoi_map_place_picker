@@ -12,6 +12,7 @@ dependencies:
   barikoi_api:
     git:
       url: "git://github.com/barikoi/barikoi_api_dartlib.git"
+      ref: "e73582a8682e639fbedb3ce53fdc1fb3da8afdf7"
   mapbox_gl:  ^0.10.0
 #  barikoi_maps_flutter: ^1.0.2
   geolocator: ^6.0.0+4
