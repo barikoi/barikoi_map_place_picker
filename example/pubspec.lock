@@ -7,14 +7,7 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.13"
-  args:
-    dependency: transitive
-    description:
-      name: args
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.6.0"
+    version: "3.1.8"
   async:
     dependency: transitive
     description:
@@ -87,20 +80,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  convert:
-    dependency: transitive
-    description:
-      name: convert
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.1"
   crypto:
     dependency: transitive
     description:
       name: crypto
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.5"
+    version: "3.0.1"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -150,14 +136,35 @@ packages:
       name: geolocator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.6"
+    version: "8.0.1"
+  geolocator_android:
+    dependency: transitive
+    description:
+      name: geolocator_android
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.1"
+  geolocator_apple:
+    dependency: transitive
+    description:
+      name: geolocator_apple
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0+2"
   geolocator_platform_interface:
     dependency: transitive
     description:
       name: geolocator_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.8"
+    version: "3.0.1"
+  geolocator_web:
+    dependency: transitive
+    description:
+      name: geolocator_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.1"
   http:
     dependency: transitive
     description:
@@ -178,7 +185,7 @@ packages:
       name: image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.19"
+    version: "3.1.0"
   js:
     dependency: transitive
     description:
@@ -186,34 +193,40 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
-  mapbox_gl:
-    dependency: transitive
-    description:
-      name: mapbox_gl
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.0"
   mapbox_gl_dart:
     dependency: transitive
     description:
       name: mapbox_gl_dart
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.5"
-  mapbox_gl_platform_interface:
+    version: "0.2.1"
+  maplibre_gl:
     dependency: transitive
     description:
-      name: mapbox_gl_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.0"
-  mapbox_gl_web:
+      path: "."
+      ref: main
+      resolved-ref: "65e7f6bd95ee843ddd64c5d3bce6db5138cc2046"
+      url: "https://github.com/m0nac0/flutter-maplibre-gl.git"
+    source: git
+    version: "0.15.0"
+  maplibre_gl_platform_interface:
     dependency: transitive
     description:
-      name: mapbox_gl_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.10.0"
+      path: maplibre_gl_platform_interface
+      ref: main
+      resolved-ref: "65e7f6bd95ee843ddd64c5d3bce6db5138cc2046"
+      url: "https://github.com/m0nac0/flutter-maplibre-gl.git"
+    source: git
+    version: "0.15.0"
+  maplibre_gl_web:
+    dependency: transitive
+    description:
+      path: maplibre_gl_web
+      ref: main
+      resolved-ref: "65e7f6bd95ee843ddd64c5d3bce6db5138cc2046"
+      url: "https://github.com/m0nac0/flutter-maplibre-gl.git"
+    source: git
+    version: "0.15.0"
   matcher:
     dependency: transitive
     description:
@@ -255,28 +268,28 @@ packages:
       name: permission_handler
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.1+1"
+    version: "8.3.0"
   permission_handler_platform_interface:
     dependency: transitive
     description:
       name: permission_handler_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.1"
+    version: "3.7.0"
   petitparser:
     dependency: transitive
     description:
       name: petitparser
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.0"
+    version: "4.4.0"
   plugin_platform_interface:
     dependency: transitive
     description:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "2.1.0"
   provider:
     dependency: transitive
     description:
@@ -365,7 +378,7 @@ packages:
       name: xml
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.5.1"
+    version: "5.3.1"
 sdks:
   dart: ">=2.14.0 <3.0.0"
-  flutter: ">=1.16.0"
+  flutter: ">=2.5.0"

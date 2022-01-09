@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:barikoi_api/model/place.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:maplibre_gl/mapbox_gl.dart';
 import 'package:barikoi_maps_place_picker/barikoi_maps_place_picker.dart';
 import 'package:barikoi_maps_place_picker/providers/place_provider.dart';
 import 'package:barikoi_maps_place_picker/src/autocomplete_search.dart';
@@ -293,7 +293,7 @@ class _PlacePickerState extends State<PlacePicker> {
   }
 
   _moveTo(double latitude, double longitude) async {
-    MapboxMapController controller = provider.mapController;
+    MaplibreMapController controller = provider.mapController;
     if (controller == null) return;
 
     await controller.animateCamera(

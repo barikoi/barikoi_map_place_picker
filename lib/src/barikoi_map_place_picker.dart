@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
-import 'package:mapbox_gl_platform_interface/mapbox_gl_platform_interface.dart';
+import 'package:maplibre_gl/mapbox_gl.dart';
+import 'package:maplibre_gl_platform_interface/maplibre_gl_platform_interface.dart';
 
 import 'package:barikoi_maps_place_picker/barikoi_maps_place_picker.dart';
 import 'package:barikoi_maps_place_picker/providers/place_provider.dart';
@@ -136,7 +136,7 @@ class BarikoiMapPlacePicker extends StatelessWidget {
 
       PlaceProvider provider = PlaceProvider.of(context, listen: false);
       CameraPosition initialCameraPosition = CameraPosition(target: initialTarget, zoom: 16);
-      return MapboxMap(
+      return MaplibreMap(
 
         styleString: "https://map.barikoi.com/styles/osm-liberty/style.json?key="+this.apikey,
         initialCameraPosition:
@@ -145,7 +145,7 @@ class BarikoiMapPlacePicker extends StatelessWidget {
         compassEnabled: false,
         zoomGesturesEnabled: true,
         myLocationEnabled: true,
-        onMapCreated: (MapboxMapController controller) {
+        onMapCreated: (MaplibreMapController controller) {
           provider.mapController = controller;
           provider.setCameraPosition(null);
           provider.pinState = PinState.Idle;
@@ -318,15 +318,13 @@ class BarikoiMapPlacePicker extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 10),
-          RaisedButton(
-            padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          OutlinedButton(
+
             child: Text(
               "Select here",
               style: TextStyle(fontSize: 16),
             ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4.0),
-            ),
+
             onPressed: () {
               onPlacePicked(result);
             },

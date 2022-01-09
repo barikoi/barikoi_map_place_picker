@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:barikoi_maps_place_picker/barikoi_maps_place_picker.dart';
 //import 'package:barikoi_maps_flutter/barikoi_maps_flutter.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:maplibre_gl/mapbox_gl.dart';
 // Your api key storage.
 import 'keys.dart';
 

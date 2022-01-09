@@ -9,7 +9,7 @@ import 'package:barikoi_maps_place_picker/src/autocomplete_search.dart';
 import 'package:barikoi_maps_place_picker/src/models/pick_result.dart';
 import 'package:barikoi_maps_place_picker/src/place_picker.dart';
 import 'package:http/http.dart';
-import 'package:mapbox_gl/mapbox_gl.dart';
+import 'package:maplibre_gl/mapbox_gl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
@@ -40,8 +40,10 @@ class PlaceProvider extends ChangeNotifier {
     try {
       await Permission.location.request();
       if (await Permission.location.request().isGranted) {
-        currentPosition = await getCurrentPosition(
+
+        Future<Position> curpos = Geolocator.getCurrentPosition(
             desiredAccuracy: desiredAccuracy ?? LocationAccuracy.high);
+        curpos.then((value) => currentPosition=value);
       } else {
         currentPosition = null;
       }
@@ -93,9 +95,9 @@ class PlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  MapboxMapController _mapController;
-  MapboxMapController get mapController => _mapController;
-  set mapController(MapboxMapController controller) {
+  MaplibreMapController _mapController;
+  MaplibreMapController get mapController => _mapController;
+  set mapController(MaplibreMapController controller) {
     _mapController = controller;
     notifyListeners();
   }
