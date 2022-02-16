@@ -15,8 +15,8 @@ class PickResult {
   });
 
   final int placeId;
-  final num latitude;
-  final num longitude;
+  num latitude;
+  num longitude;
   final String area;
   final String formattedAddress;
   final String city;
@@ -43,5 +43,13 @@ class PickResult {
       city: result.city,
 
     );
+  }
+
+  PickResult setLongitude(num longitude){
+    this.longitude=longitude;
+  }
+
+  PickResult setLatitude(num Latitude){
+    this.latitude=latitude;
   }
 }

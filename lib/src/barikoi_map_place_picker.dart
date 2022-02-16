@@ -101,8 +101,12 @@ class BarikoiMapPlacePicker extends StatelessWidget {
     );
     response.then((value) {
       if(value.data.status ==200){
+        var lat = provider.mapController?.cameraPosition?.target.latitude;
+        var lon = provider.mapController?.cameraPosition?.target.longitude;
 
-        provider.selectedPlace = PickResult.fromGeocodingResult(value.data.place);
+        provider.selectedPlace = PickResult.fromGeocodingResult(value.data.place)
+        .setLatitude(lat)
+        .setLongitude(lon);
         provider.placeSearchingState = SearchingState.Idle;
       }else{
         if (onSearchFailed != null) {

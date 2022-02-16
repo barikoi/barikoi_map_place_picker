@@ -1,4 +1,4 @@
-import 'dart:async';
+ import 'dart:async';
 
 import 'package:barikoi_api/model/place.dart';
 import 'package:flutter/material.dart';
