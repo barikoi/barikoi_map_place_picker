@@ -5,7 +5,7 @@ import 'package:barikoi_maps_place_picker/barikoi_maps_place_picker.dart';
 //import 'package:barikoi_maps_flutter/barikoi_maps_flutter.dart';
 import 'package:maplibre_gl/mapbox_gl.dart';
 // Your api key storage.
-import 'keys.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              RaisedButton(
+              ElevatedButton(
                 child: Text("Load Barikoi Map"),
                 onPressed: () {
                   Navigator.push(
@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(
                       builder: (context) {
                         return PlacePicker(
-                          apiKey: APIKeys.apiKey,
+                          apiKey: "MTpPVkhCVEZaM09F",
                           initialPosition: HomePage.kInitialPosition,
                           useCurrentLocation: true,
                           selectInitialPosition: true,

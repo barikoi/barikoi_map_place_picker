@@ -1,50 +1,55 @@
 PODS:
   - Flutter (1.0.0)
-  - "geolocator (6.0.0+4)":
+  - geolocator_apple (1.2.0):
     - Flutter
-  - Mapbox-iOS-SDK (5.6.1):
-    - MapboxMobileEvents (= 0.10.2)
-  - mapbox_gl (0.0.1):
+  - MapLibre (5.12.1)
+  - maplibre_gl (0.0.1):
     - Flutter
-    - Mapbox-iOS-SDK (~> 5.6.0)
-    - MapboxAnnotationExtension (~> 0.0.1-beta.1)
-  - MapboxAnnotationExtension (0.0.1-beta.1):
-    - Mapbox-iOS-SDK (~> 5.2)
-  - MapboxMobileEvents (0.10.2)
-  - "permission_handler (5.0.1+1)":
+    - MapLibre (~> 5.12.1)
+    - MapLibreAnnotationExtension (~> 0.0.1-beta.2)
+  - MapLibreAnnotationExtension (0.0.1-beta.2):
+    - MapLibre (~> 5.12.0)
+  - "permission_handler (5.1.0+2)":
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - geolocator (from `.symlinks/plugins/geolocator/ios`)
-  - mapbox_gl (from `.symlinks/plugins/mapbox_gl/ios`)
+  - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
+  - MapLibre (from `https://github.com/m0nac0/maplibre-cocoapods.git`)
+  - maplibre_gl (from `.symlinks/plugins/maplibre_gl/ios`)
+  - MapLibreAnnotationExtension (from `https://github.com/m0nac0/maplibre-annotation-extension.git`)
   - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
-
-SPEC REPOS:
-  trunk:
-    - Mapbox-iOS-SDK
-    - MapboxAnnotationExtension
-    - MapboxMobileEvents
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  geolocator:
-    :path: ".symlinks/plugins/geolocator/ios"
-  mapbox_gl:
-    :path: ".symlinks/plugins/mapbox_gl/ios"
+  geolocator_apple:
+    :path: ".symlinks/plugins/geolocator_apple/ios"
+  MapLibre:
+    :git: https://github.com/m0nac0/maplibre-cocoapods.git
+  maplibre_gl:
+    :path: ".symlinks/plugins/maplibre_gl/ios"
+  MapLibreAnnotationExtension:
+    :git: https://github.com/m0nac0/maplibre-annotation-extension.git
   permission_handler:
     :path: ".symlinks/plugins/permission_handler/ios"
 
+CHECKOUT OPTIONS:
+  MapLibre:
+    :commit: 552f0bf90755f6e00cb5882a5c0c89bd4d8633d0
+    :git: https://github.com/m0nac0/maplibre-cocoapods.git
+  MapLibreAnnotationExtension:
+    :commit: d7dee65155fd50bfab7f94a484eac05ff09beea9
+    :git: https://github.com/m0nac0/maplibre-annotation-extension.git
+
 SPEC CHECKSUMS:
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  geolocator: 1ae40084cc6c1586ce5ad12cfc3fd38c64d05f2f
-  Mapbox-iOS-SDK: b31bd62a5dd5b7e688eab787acd3d093a122f4d6
-  mapbox_gl: 48d261b93d7dfc2367c2f93b493ea8f43df5ba96
-  MapboxAnnotationExtension: d66de5561562c9d940153c0135725e671407b781
-  MapboxMobileEvents: 2bc0ca2eedb627b73cf403258dce2b2fa98074a6
-  permission_handler: eac8e15b4a1a3fba55b761d19f3f4e6b005d15b6
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  geolocator_apple: cc556e6844d508c95df1e87e3ea6fa4e58c50401
+  MapLibre: d9f0a2d2b0e0a83611bb7bcb03ef2bcd701efb56
+  maplibre_gl: 9a036eeac06dcf153f84d90c33099fb40b7e15e0
+  MapLibreAnnotationExtension: 6a76d7ea48a44953095fbf95331ac67c7f4fa0be
+  permission_handler: ccb20a9fad0ee9b1314a52b70b76b473c5f8dab0
 
-PODFILE CHECKSUM: 1a012ce3db1c1a5aff66d98fb075c09f5165b574
+PODFILE CHECKSUM: 2ffea73f179cc89cedf112638b0208ee77d7181d
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.11.2
