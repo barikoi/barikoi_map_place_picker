@@ -16,7 +16,7 @@ dependencies:
   barikoi_api:
     git:
       url: "git://github.com/barikoi/barikoi_api_dartlib.git"
-      ref: "bd9647d78ad9022c213f525a15a6ebcfbf5705be"
+      ref: "0c39f5fc28557f92f2fd64db456e1046b69c6a3d"
 #  mapbox_gl:  ^0.11.0
   maplibre_gl:
     git:
