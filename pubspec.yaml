@@ -3,8 +3,12 @@ description: A Flutter plugin which provides 'Picking Place' using Barikoi Maps 
 version: 1.0.0
 homepage: https://github.com/fysoul17/google_maps_place_picker
 
+analyzer:
+  enable-experiment:
+    - non-nullable
+
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:

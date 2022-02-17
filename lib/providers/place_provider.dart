@@ -14,7 +14,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class PlaceProvider extends ChangeNotifier {
-  PlaceProvider(String apiKey, String proxyBaseUrl, Client httpClient) {
+  PlaceProvider(String apiKey, String? proxyBaseUrl, Client? httpClient) {
 
     /*geocoding = BarikoiMapsGeocoding(
       apiKey: apiKey,
@@ -32,10 +32,10 @@ class PlaceProvider extends ChangeNotifier {
 
   //BarikoiMapsGeocoding geocoding;
   bool isOnUpdateLocationCooldown = false;
-  LocationAccuracy desiredAccuracy;
+  LocationAccuracy? desiredAccuracy;
   bool isAutoCompleteSearching = false;
-  PlaceApi bkoiplace;
-  AutoCompleteSearch bkoisearch;
+  late PlaceApi bkoiplace;
+  AutoCompleteSearch? bkoisearch;
   Future<void> updateCurrentLocation(bool forceAndroidLocationManager) async {
     try {
       await Permission.location.request();
@@ -55,35 +55,35 @@ class PlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Position _currentPoisition;
-  Position get currentPosition => _currentPoisition;
-  set currentPosition(Position newPosition) {
+  Position? _currentPoisition;
+  Position? get currentPosition => _currentPoisition;
+  set currentPosition(Position? newPosition) {
     _currentPoisition = newPosition;
     notifyListeners();
   }
 
-  Timer _debounceTimer;
-  Timer get debounceTimer => _debounceTimer;
-  set debounceTimer(Timer timer) {
+  Timer? _debounceTimer;
+  Timer? get debounceTimer => _debounceTimer;
+  set debounceTimer(Timer? timer) {
     _debounceTimer = timer;
     notifyListeners();
   }
 
-  CameraPosition _previousCameraPosition;
-  CameraPosition get prevCameraPosition => _previousCameraPosition;
+  CameraPosition? _previousCameraPosition;
+  CameraPosition? get prevCameraPosition => _previousCameraPosition;
   setPrevCameraPosition(CameraPosition prePosition) {
     _previousCameraPosition = prePosition;
   }
 
-  CameraPosition _currentCameraPosition;
-  CameraPosition get cameraPosition => _currentCameraPosition;
-  setCameraPosition(CameraPosition newPosition) {
+  CameraPosition? _currentCameraPosition;
+  CameraPosition? get cameraPosition => _currentCameraPosition;
+  setCameraPosition(CameraPosition? newPosition) {
     _currentCameraPosition = newPosition;
   }
 
-  PickResult _selectedPlace;
-  PickResult get selectedPlace => _selectedPlace;
-  set selectedPlace(PickResult result) {
+  PickResult? _selectedPlace;
+  PickResult? get selectedPlace => _selectedPlace;
+  set selectedPlace(PickResult? result) {
     _selectedPlace = result;
     notifyListeners();
   }
@@ -95,9 +95,9 @@ class PlaceProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  MaplibreMapController _mapController;
-  MaplibreMapController get mapController => _mapController;
-  set mapController(MaplibreMapController controller) {
+  MaplibreMapController? _mapController;
+  MaplibreMapController? get mapController => _mapController;
+  set mapController(MaplibreMapController? controller) {
     _mapController = controller;
     notifyListeners();
   }

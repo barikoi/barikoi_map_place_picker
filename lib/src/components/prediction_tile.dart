@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 
 class PredictionTile extends StatelessWidget {
   final Place prediction;
-  final ValueChanged<Place> onTap;
+  final ValueChanged<Place>? onTap;
 
-  PredictionTile({@required this.prediction, this.onTap});
+  PredictionTile({required this.prediction, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +18,15 @@ class PredictionTile extends StatelessWidget {
       ),
       onTap: () {
         if (onTap != null) {
-          onTap(prediction);
+          onTap!(prediction);
         }
       },
     );
   }
 
   List<TextSpan> _buildPredictionText(BuildContext context) {
-    final List<TextSpan> result = List<TextSpan>();
-    final textColor = Theme.of(context).textTheme.headline6.color;
+    final List<TextSpan> result = <TextSpan>[];
+    final textColor = Theme.of(context).textTheme.headline6!.color;
 
     result.add(
       TextSpan(

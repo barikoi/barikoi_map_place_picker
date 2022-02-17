@@ -14,15 +14,15 @@ class PickResult {
     this.uCode
   });
 
-  final int placeId;
-  num latitude;
-  num longitude;
-  final String area;
-  final String formattedAddress;
-  final String city;
-  final int postCode;
-  final String pType;
-  final String uCode;
+  final int? placeId;
+  num? latitude;
+  num? longitude;
+  final String? area;
+  final String? formattedAddress;
+  final String? city;
+  final int? postCode;
+  final String? pType;
+  final String? uCode;
 
   factory PickResult.fromGeocodingResult(Place result) {
     return PickResult(
@@ -36,8 +36,8 @@ class PickResult {
   factory PickResult.fromPlaceDetailResult(Place result) {
     return PickResult(
       placeId: result.id,
-      latitude: num.parse(result.latitude),
-      longitude: num.parse(result.longitude),
+      latitude: num.parse(result.latitude!),
+      longitude: num.parse(result.longitude!),
       formattedAddress: result.address,
       area: result.area,
       city: result.city,
@@ -47,9 +47,11 @@ class PickResult {
 
   PickResult setLongitude(num longitude){
     this.longitude=longitude;
+    return this;
   }
 
   PickResult setLatitude(num Latitude){
     this.latitude=latitude;
+    return this;
   }
 }
