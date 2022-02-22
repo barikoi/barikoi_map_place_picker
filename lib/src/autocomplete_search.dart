@@ -193,7 +193,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
 
   _onFocusChanged() {
     PlaceProvider provider = PlaceProvider.of(context, listen: false);
-    provider.isSearchBarFocused = focus.hasFocus;
+    provider.isSearchBarFocused = focus.hasPrimaryFocus;
     provider.debounceTimer?.cancel();
   }
 
@@ -300,7 +300,6 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
 
   _performAutoCompleteSearch(String searchTerm) async {
     PlaceProvider provider = PlaceProvider.of(context, listen: false);
-
     if (searchTerm.isNotEmpty) {
       final Future<Response<InlineResponse2001>> response =
           provider.bkoiplace.getautocompleteplacelist(searchTerm);
@@ -326,7 +325,6 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
       _displayOverlay(_buildPredictionOverlay(List.from(response.data.places)));*/
     }
   }
-
   clearText() {
     provider.searchTerm = "";
     controller.clear();

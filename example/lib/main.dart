@@ -82,7 +82,6 @@ class _HomePageState extends State<HomePage> {
                           useCurrentLocation: true,
                           selectInitialPosition: true,
                           usePinPointingSearch: true,
-                          //usePlaceDetailSearch: true,
                           onPlacePicked: (result) {
                             selectedPlace = result;
                             log("place ucode: "+result.toString());

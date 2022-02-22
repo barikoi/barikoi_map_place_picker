@@ -33,6 +33,8 @@ typedef PinBuilder = Widget Function(
 class BarikoiMapPlacePicker extends StatelessWidget {
 
 
+
+
   const BarikoiMapPlacePicker({
     Key? key,
     required this.apikey,
@@ -55,6 +57,7 @@ class BarikoiMapPlacePicker extends StatelessWidget {
     this.language,
     this.forceSearchOnZoomChanged,
     this.hidePlaceDetailsWhenDraggingPin,
+    this.useCurrentLocation=true,
   }) : super(key: key);
 
   final String apikey;
@@ -81,7 +84,7 @@ class BarikoiMapPlacePicker extends StatelessWidget {
   final bool? selectInitialPosition;
 
   final String? language;
-
+  final bool useCurrentLocation;
   final bool? forceSearchOnZoomChanged;
   final bool? hidePlaceDetailsWhenDraggingPin;
 
@@ -95,18 +98,16 @@ class BarikoiMapPlacePicker extends StatelessWidget {
     }
 
     provider.placeSearchingState = SearchingState.Searching;
-
-    final Future<Response<InlineResponse200>> response = provider.bkoiplace.getrevgeoplace(
-      provider.mapController!.cameraPosition!.target.latitude, provider.mapController!.cameraPosition!.target.longitude
-    );
+    double? lat = provider.mapController?.cameraPosition?.target.latitude;
+    double? lon = provider.mapController?.cameraPosition?.target.longitude;
+    final Future<Response<InlineResponse200>> response = provider.bkoiplace.getrevgeoplace(lat!,lon!);
     response.then((value) {
       if(value.data!.status ==200){
-        double? lat = provider.mapController?.cameraPosition?.target.latitude;
-        double? lon = provider.mapController?.cameraPosition?.target.longitude;
+
 
         provider.selectedPlace = PickResult.fromGeocodingResult(value.data!.place!)
-        .setLatitude(lat!)
-        .setLongitude(lon!);
+        .setLatitude(lat)
+        .setLongitude(lon);
         provider.placeSearchingState = SearchingState.Idle;
       }else{
         if (onSearchFailed != null) {
@@ -145,32 +146,38 @@ class BarikoiMapPlacePicker extends StatelessWidget {
         styleString: "https://map.barikoi.com/styles/osm-liberty/style.json?key="+this.apikey,
         initialCameraPosition:
          CameraPosition(target: initialTarget,zoom: 16),
-        myLocationRenderMode: MyLocationRenderMode.NORMAL,
-        compassEnabled: false,
+        myLocationRenderMode: MyLocationRenderMode.GPS,
+        compassEnabled: true,
         zoomGesturesEnabled: true,
         myLocationEnabled: true,
         onMapCreated: (MaplibreMapController controller) {
           provider.mapController = controller;
           provider.setCameraPosition(null);
           provider.pinState = PinState.Idle;
-
+          provider.updateCurrentLocation(false);
           // When select initialPosition set to true.
+          if(useCurrentLocation){
+            onMyLocation!();
+          }
           if (selectInitialPosition!) {
             provider.setCameraPosition(initialCameraPosition);
             _searchByCameraLocation(provider);
           }
         },
+
         trackCameraPosition: true,
+
         onCameraIdle: () {
 
           log("camera movement stopped");
-          if (provider.isAutoCompleteSearching) {
-            provider.isAutoCompleteSearching = false;
+          if (provider.isSearchBarFocused) {
+            provider.isAutoCompleteSearching = true;
+
             provider.pinState = PinState.Idle;
             return;
           }
-
           onMoveStart!();
+
           // Perform search only if the setting is to true.
           if (usePinPointingSearch!) {
             // Search current camera location only if camera has moved (dragged) before.
@@ -346,19 +353,19 @@ class BarikoiMapPlacePicker extends StatelessWidget {
       right: 15,
       child: Column(
         children: <Widget>[
-          enableMapTypeButton!
-              ? Container(
-                  width: 35,
-                  height: 35,
-                  child: RawMaterialButton(
-                    shape: CircleBorder(),
-                    fillColor: Theme.of(context).brightness == Brightness.dark ? Colors.black54 : Colors.white,
-                    elevation: 8.0,
-                    onPressed: onToggleMapType,
-                    child: Icon(Icons.layers),
-                  ),
-                )
-              : Container(),
+          // enableMapTypeButton!
+          //     ? Container(
+          //         width: 35,
+          //         height: 35,
+          //         child: RawMaterialButton(
+          //           shape: CircleBorder(),
+          //           fillColor: Theme.of(context).brightness == Brightness.dark ? Colors.black54 : Colors.white,
+          //           elevation: 8.0,
+          //           onPressed: onToggleMapType,
+          //           child: Icon(Icons.layers),
+          //         ),
+          //       )
+          //     : Container(),
           SizedBox(height: 10),
           enableMyLocationButton!
               ? Container(

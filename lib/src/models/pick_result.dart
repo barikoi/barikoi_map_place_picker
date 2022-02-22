@@ -50,7 +50,7 @@ class PickResult {
     return this;
   }
 
-  PickResult setLatitude(num Latitude){
+  PickResult setLatitude(num latitude){
     this.latitude=latitude;
     return this;
   }

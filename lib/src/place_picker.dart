@@ -22,7 +22,7 @@ class PlacePicker extends StatefulWidget {
     required this.apiKey,
     this.onPlacePicked,
     required this.initialPosition,
-    this.useCurrentLocation,
+    this.useCurrentLocation=true,
     this.desiredLocationAccuracy = LocationAccuracy.high,
     this.onMapCreated,
     this.hintText,
@@ -39,7 +39,7 @@ class PlacePicker extends StatefulWidget {
     this.cameraMoveDebounceInMilliseconds = 350,
     this.enableMapTypeButton = true,
     this.enableMyLocationButton = true,
-    this.myLocationButtonCooldown = 10,
+    this.myLocationButtonCooldown = 3,
     this.usePinPointingSearch = true,
     this.usePlaceDetailSearch = false,
     this.autocompleteOffset,
@@ -63,7 +63,7 @@ class PlacePicker extends StatefulWidget {
   final String apiKey;
 
   final LatLng initialPosition;
-  final bool? useCurrentLocation;
+  final bool useCurrentLocation;
   final LocationAccuracy desiredLocationAccuracy;
 
   final MapCreatedCallback? onMapCreated;
@@ -314,23 +314,23 @@ class _PlacePickerState extends State<PlacePicker> {
   }
 
   Widget _buildMapWithLocation() {
-    if (widget.useCurrentLocation!) {
-      return FutureBuilder(
-          future: provider!
-              .updateCurrentLocation(widget.forceAndroidLocationManager),
-          builder: (context, snap) {
-            if (snap.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else {
-              if (provider!.currentPosition == null) {
-                return _buildMap(widget.initialPosition);
-              } else {
-                return _buildMap(LatLng(provider!.currentPosition!.latitude,
-                    provider!.currentPosition!.longitude));
-              }
-            }
-          });
-    } else {
+    // if (widget.useCurrentLocation!) {
+    //   return FutureBuilder(
+    //       future: provider!
+    //           .updateCurrentLocation(widget.forceAndroidLocationManager),
+    //       builder: (context, snap) {
+    //         if (snap.connectionState == ConnectionState.waiting) {
+    //           return const Center(child: CircularProgressIndicator());
+    //         } else {
+    //           if (provider!.currentPosition == null) {
+    //             return _buildMap(widget.initialPosition);
+    //           } else {
+    //             return _buildMap(LatLng(provider!.currentPosition!.latitude,
+    //                 provider!.currentPosition!.longitude));
+    //           }
+    //         }
+    //       });
+    // } else {
       return FutureBuilder(
         future: Future.delayed(Duration(milliseconds: 1)),
         builder: (context, snap) {
@@ -341,7 +341,7 @@ class _PlacePickerState extends State<PlacePicker> {
           }
         },
       );
-    }
+    // }
   }
 
   Widget _buildMap(LatLng initialTarget) {
@@ -355,6 +355,7 @@ class _PlacePickerState extends State<PlacePicker> {
       debounceMilliseconds: widget.cameraMoveDebounceInMilliseconds,
       enableMapTypeButton: widget.enableMapTypeButton,
       enableMyLocationButton: widget.enableMyLocationButton,
+      useCurrentLocation: widget.useCurrentLocation,
       usePinPointingSearch: widget.usePinPointingSearch,
       usePlaceDetailSearch: widget.usePlaceDetailSearch,
       onMapCreated: widget.onMapCreated,
@@ -370,9 +371,8 @@ class _PlacePickerState extends State<PlacePicker> {
           Timer(Duration(seconds: widget.myLocationButtonCooldown), () {
             provider!.isOnUpdateLocationCooldown = false;
           });
-          await provider!
-              .updateCurrentLocation(widget.forceAndroidLocationManager);
-          await _moveToCurrentPosition();
+          provider!
+              .updateCurrentLocation(widget.forceAndroidLocationManager).then((value) => _moveToCurrentPosition());
         }
       },
       onMoveStart: () {
