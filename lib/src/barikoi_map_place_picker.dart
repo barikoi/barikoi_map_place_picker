@@ -146,7 +146,7 @@ class BarikoiMapPlacePicker extends StatelessWidget {
         styleString: "https://map.barikoi.com/styles/osm-liberty/style.json?key="+this.apikey,
         initialCameraPosition:
          CameraPosition(target: initialTarget,zoom: 16),
-        myLocationRenderMode: MyLocationRenderMode.GPS,
+        myLocationRenderMode: MyLocationRenderMode.NORMAL,
         compassEnabled: true,
         zoomGesturesEnabled: true,
         myLocationEnabled: true,
