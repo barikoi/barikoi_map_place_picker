@@ -39,6 +39,7 @@ For android, add the location permissions in the app manifest
 ```
 
 To use the place picker as a widget, add the following code 
+``` 
 PlacePicker(
     apiKey: "API_KEY", //Barikoi API key
     initialPosition: HomePage.kInitialPosition, //initial location position to start the map with 
@@ -49,3 +50,4 @@ PlacePicker(
     selectedPlace = result;
     },
 );
+```
