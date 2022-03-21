@@ -15,8 +15,8 @@ dependencies:
     sdk: flutter
   barikoi_api:
     git:
-      url: "git://github.com/barikoi/barikoi_api_dartlib.git"
-      ref: "0c39f5fc28557f92f2fd64db456e1046b69c6a3d"
+      url: https://github.com/barikoi/barikoi_api_dartlib.git
+      ref: 0c39f5fc28557f92f2fd64db456e1046b69c6a3d
 #  mapbox_gl:  ^0.11.0
   maplibre_gl:
     git:
