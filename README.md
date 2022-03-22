@@ -5,9 +5,9 @@ If this Dart package is published to Github, please include the following in pub
 ```
 
 dependencies:
-  barikoi_api:
+  barikoi_map_place_picker:
     git: https://github.com/barikoi/barikoi_map_place_picker.git
-      version: 'any'
+      ref: 'main'
 ```
 
 ### Local
