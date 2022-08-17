@@ -10,7 +10,6 @@ import 'package:barikoi_maps_place_picker/src/models/pick_result.dart';
 import 'package:barikoi_maps_place_picker/src/place_picker.dart';
 import 'package:http/http.dart';
 import 'package:maplibre_gl/mapbox_gl.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class PlaceProvider extends ChangeNotifier {
@@ -43,12 +42,14 @@ class PlaceProvider extends ChangeNotifier {
       if(value == LocationPermission.whileInUse || value ==LocationPermission.always){
         currentPosition= await Geolocator.getCurrentPosition(
         desiredAccuracy: desiredAccuracy ?? LocationAccuracy.high);
+        notifyListeners();
         return currentPosition;
       }else if (value == LocationPermission.denied || value ==LocationPermission.unableToDetermine){
         LocationPermission value=await Geolocator.requestPermission();
         if(value == LocationPermission.whileInUse || value ==LocationPermission.always){
           currentPosition= await Geolocator.getCurrentPosition(
               desiredAccuracy: desiredAccuracy ?? LocationAccuracy.high);
+          notifyListeners();
           return currentPosition;
         }
       }
@@ -71,8 +72,8 @@ class PlaceProvider extends ChangeNotifier {
       log(e.toString());
       currentPosition = null;
     }
-
     notifyListeners();
+    return null;
   }
 
   Position? _currentPoisition;

@@ -200,7 +200,7 @@ class _PlacePickerState extends State<PlacePicker> {
           child: Builder(
             builder: (context) {
               return Scaffold(
-                resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
+                resizeToAvoidBottomInset: false,
                 extendBodyBehindAppBar: true,
                 appBar: AppBar(
                   key: appBarKey,

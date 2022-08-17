@@ -4,17 +4,11 @@ import 'dart:developer';
 import 'package:barikoi_api/model/inline_response200.dart';
 import 'package:dio/src/response.dart';
 import 'package:flutter/material.dart';
-
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:maplibre_gl/mapbox_gl.dart';
-import 'package:maplibre_gl_platform_interface/maplibre_gl_platform_interface.dart';
 
 import 'package:barikoi_maps_place_picker/barikoi_maps_place_picker.dart';
 import 'package:barikoi_maps_place_picker/providers/place_provider.dart';
 import 'package:barikoi_maps_place_picker/src/components/animated_pin.dart';
-import 'package:barikoi_maps_place_picker/src/components/floating_card.dart';
-import 'package:barikoi_maps_place_picker/src/place_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
@@ -199,7 +193,7 @@ class BarikoiMapPlacePicker extends StatelessWidget {
         },*/
         // gestureRecognizers make it possible to navigate the map when it's a
         // child in a scroll view e.g ListView, SingleChildScrollView...
-        gestureRecognizers: Set()..add(Factory<EagerGestureRecognizer>(() => EagerGestureRecognizer())),
+        // gestureRecognizers: Set()..add(Factory<EagerGestureRecognizer>(() => EagerGestureRecognizer())),
 
       );
 

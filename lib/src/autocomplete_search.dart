@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:barikoi_api/model/inline_response2001.dart';
 import 'package:barikoi_api/model/place.dart';
@@ -34,8 +33,7 @@ class AutoCompleteSearch extends StatefulWidget {
       this.initialSearchString,
       this.searchForInitialValue,
       this.autocompleteOnTrailingWhitespace})
-      : assert(searchBarController != null),
-        super(key: key);
+      :super(key: key);
 
   final String? hintText;
   final String? searchingText;
@@ -71,7 +69,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
   void initState() {
     super.initState();
     if (widget.initialSearchString != null) {
-      WidgetsBinding.instance!.addPostFrameCallback((_) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         controller.text = widget.initialSearchString!;
         if (widget.searchForInitialValue!) {
           _onSearchInputChange();
@@ -199,8 +197,6 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
 
   _searchPlace(String searchTerm) {
     this.provider.prevSearchTerm = searchTerm;
-
-    if (context == null) return;
 
     _clearOverlay();
 
