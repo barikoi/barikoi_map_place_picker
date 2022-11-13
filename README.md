@@ -22,8 +22,11 @@ dependencies:
 ## Getting Started
 For iOS platform, go to your projects ios folder and add these lines to your pod file :  
 ```
-pod 'MapLibre', :git =>  'https://github.com/m0nac0/maplibre-cocoapods.git'
-pod 'MapLibreAnnotationExtension', :git => 'https://github.com/m0nac0/maplibre-annotation-extension.git'
+source 'https://cdn.cocoapods.org/'
+source 'https://github.com/m0nac0/flutter-maplibre-podspecs.git'
+
+pod 'MapLibre'
+pod 'MapLibreAnnotationExtension'
 ```
 
 open your info.plist file and add these string resources
