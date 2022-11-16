@@ -4,3 +4,4 @@ export 'src/models/pick_result.dart';
 export 'src/components/floating_card.dart';
 export 'src/components/rounded_frame.dart';
 export 'src/place_picker.dart';
+export 'package:maplibre_gl_platform_interface/maplibre_gl_platform_interface.dart';
