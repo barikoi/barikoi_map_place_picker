@@ -5,7 +5,7 @@ If this Dart package is published to Github, please include the following in pub
 ```
 
 dependencies:
-  barikoi_map_place_picker:
+  barikoi_maps_place_picker:
     git: 
       url: https://github.com/barikoi/barikoi_map_place_picker.git
       ref: main
@@ -15,15 +15,18 @@ dependencies:
 To use the package in your local drive, please include the following in pubspec.yaml
 ```
 dependencies:
-  barikoi_api:
+  barikoi_maps_place_picker:
     path: /path/to/barikoi_map_place_picker
 ```
 
 ## Getting Started
 For iOS platform, go to your projects ios folder and add these lines to your pod file :  
 ```
-pod 'MapLibre', :git =>  'https://github.com/m0nac0/maplibre-cocoapods.git'
-pod 'MapLibreAnnotationExtension', :git => 'https://github.com/m0nac0/maplibre-annotation-extension.git'
+source 'https://cdn.cocoapods.org/'
+source 'https://github.com/m0nac0/flutter-maplibre-podspecs.git'
+
+pod 'MapLibre'
+pod 'MapLibreAnnotationExtension'
 ```
 
 open your info.plist file and add these string resources
