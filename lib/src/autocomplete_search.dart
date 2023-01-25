@@ -1,11 +1,10 @@
 import 'dart:async';
 
-import 'package:barikoi_api/model/inline_response2001.dart';
-import 'package:barikoi_api/model/place.dart';
+import 'package:barikoi_api/barikoi_api.dart';
 import 'package:dio/src/response.dart';
 import 'package:flutter/material.dart';
-import 'package:barikoi_maps_place_picker/providers/place_provider.dart';
-import 'package:barikoi_maps_place_picker/providers/search_provider.dart';
+import 'package:barikoi_maps_place_picker/src/providers/place_provider.dart';
+import 'package:barikoi_maps_place_picker/src/providers/search_provider.dart';
 import 'package:barikoi_maps_place_picker/src/components/prediction_tile.dart';
 import 'package:barikoi_maps_place_picker/src/components/rounded_frame.dart';
 import 'package:barikoi_maps_place_picker/src/controllers/autocomplete_search_controller.dart';
@@ -33,7 +32,7 @@ class AutoCompleteSearch extends StatefulWidget {
       this.initialSearchString,
       this.searchForInitialValue,
       this.autocompleteOnTrailingWhitespace})
-      :super(key: key);
+      : super(key: key);
 
   final String? hintText;
   final String? searchingText;
@@ -235,7 +234,8 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
 
     Overlay.of(context)!.insert(overlayEntry!);
   }
-  Widget _buildNotFoundOverlay(){
+
+  Widget _buildNotFoundOverlay() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       child: Row(
@@ -248,7 +248,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
           SizedBox(width: 24),
           Expanded(
             child: Text(
-               "Not Found",
+              "Not Found",
               style: TextStyle(fontSize: 16),
             ),
           )
@@ -256,6 +256,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
       ),
     );
   }
+
   Widget _buildSearchingOverlay() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
@@ -297,15 +298,17 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
   _performAutoCompleteSearch(String searchTerm) async {
     PlaceProvider provider = PlaceProvider.of(context, listen: false);
     if (searchTerm.isNotEmpty) {
-      final Future<Response<InlineResponse2001>> response =
-          provider.bkoiplace.getautocompleteplacelist(searchTerm);
-      response.then((value){
-        if(value.data!.places!.isNotEmpty) _displayOverlay(_buildPredictionOverlay(List.from(value.data!.places!)));
-        else  {
+      final Future<Response<Getautocompleteplacelist200Response>> response =
+          provider.bkoiplace.getautocompleteplacelist(q: searchTerm);
+      response.then((value) {
+        if (value.data!.places!.isNotEmpty)
+          _displayOverlay(
+              _buildPredictionOverlay(List.from(value.data!.places!)));
+        else {
           _displayOverlay(_buildNotFoundOverlay());
           widget.onSearchFailed!(value.statusMessage);
-        }})
-      .catchError((error){
+        }
+      }).catchError((error) {
         _displayOverlay(_buildNotFoundOverlay());
         widget.onSearchFailed!(error.toString());
       });
@@ -321,6 +324,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
       _displayOverlay(_buildPredictionOverlay(List.from(response.data.places)));*/
     }
   }
+
   clearText() {
     provider.searchTerm = "";
     controller.clear();

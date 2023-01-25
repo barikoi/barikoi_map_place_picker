@@ -1,7 +1,6 @@
 import 'dart:async';
 
-import 'package:barikoi_api/api.dart';
-import 'package:barikoi_api/api/place_api.dart';
+import 'package:barikoi_api/barikoi_api.dart';
 import 'package:flutter/widgets.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:barikoi_maps_place_picker/src/autocomplete_search.dart';
@@ -14,16 +13,14 @@ import 'package:provider/provider.dart';
 
 class PlaceProvider extends ChangeNotifier {
   PlaceProvider(String apiKey, String? proxyBaseUrl, Client? httpClient) {
-
     /*geocoding = BarikoiMapsGeocoding(
       apiKey: apiKey,
       baseUrl: proxyBaseUrl,
       httpClient: httpClient,
     );*/
-    var bkoi=new BarikoiApi();
-    bkoi.setApiKey("key",  apiKey);
-    bkoiplace= bkoi.getPlaceApi();
-
+    var bkoi = new BarikoiApi();
+    bkoi.setApiKey("key", apiKey);
+    bkoiplace = bkoi.getPlaceApi();
   }
 
   static PlaceProvider of(BuildContext context, {bool listen = true}) =>
@@ -35,25 +32,28 @@ class PlaceProvider extends ChangeNotifier {
   bool isAutoCompleteSearching = false;
   late PlaceApi bkoiplace;
   AutoCompleteSearch? bkoisearch;
-  Future<Position?> updateCurrentLocation(bool forceAndroidLocationManager) async {
+  Future<Position?> updateCurrentLocation(
+      bool forceAndroidLocationManager) async {
     try {
-      LocationPermission value=await Geolocator.checkPermission();
+      LocationPermission value = await Geolocator.checkPermission();
 
-      if(value == LocationPermission.whileInUse || value ==LocationPermission.always){
-        currentPosition= await Geolocator.getCurrentPosition(
-        desiredAccuracy: desiredAccuracy ?? LocationAccuracy.high);
+      if (value == LocationPermission.whileInUse ||
+          value == LocationPermission.always) {
+        currentPosition = await Geolocator.getCurrentPosition(
+            desiredAccuracy: desiredAccuracy ?? LocationAccuracy.high);
         notifyListeners();
         return currentPosition;
-      }else if (value == LocationPermission.denied || value ==LocationPermission.unableToDetermine){
-        LocationPermission value=await Geolocator.requestPermission();
-        if(value == LocationPermission.whileInUse || value ==LocationPermission.always){
-          currentPosition= await Geolocator.getCurrentPosition(
+      } else if (value == LocationPermission.denied ||
+          value == LocationPermission.unableToDetermine) {
+        LocationPermission value = await Geolocator.requestPermission();
+        if (value == LocationPermission.whileInUse ||
+            value == LocationPermission.always) {
+          currentPosition = await Geolocator.getCurrentPosition(
               desiredAccuracy: desiredAccuracy ?? LocationAccuracy.high);
           notifyListeners();
           return currentPosition;
         }
-      }
-      else{
+      } else {
         log(value.toString());
         return null;
       }
@@ -136,5 +136,4 @@ class PlaceProvider extends ChangeNotifier {
     _isSeachBarFocused = focused;
     notifyListeners();
   }
-
 }

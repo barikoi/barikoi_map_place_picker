@@ -1,4 +1,4 @@
-import 'package:barikoi_api/model/place.dart';
+import 'package:barikoi_api/barikoi_api.dart';
 import 'package:flutter/material.dart';
 
 class PredictionTile extends StatelessWidget {

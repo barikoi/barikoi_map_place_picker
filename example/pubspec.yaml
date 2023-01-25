@@ -24,7 +24,10 @@ dependencies:
   cupertino_icons: ^0.1.2
 
   barikoi_maps_place_picker:
-    path: ../
+#    git:
+#      url: https://github.com/barikoi/barikoi_map_place_picker.git
+#      ref: master
+     path: ../
 
 dev_dependencies:
   flutter_test:

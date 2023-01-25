@@ -1,11 +1,12 @@
- import 'dart:async';
+import 'dart:async';
 
-import 'package:barikoi_api/model/place.dart';
+import 'package:barikoi_api/barikoi_api.dart';
+import 'package:barikoi_maps_place_picker/src/models/place_details.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:maplibre_gl/mapbox_gl.dart';
 import 'package:barikoi_maps_place_picker/barikoi_maps_place_picker.dart';
-import 'package:barikoi_maps_place_picker/providers/place_provider.dart';
+import 'package:barikoi_maps_place_picker/src/providers/place_provider.dart';
 import 'package:barikoi_maps_place_picker/src/autocomplete_search.dart';
 import 'package:barikoi_maps_place_picker/src/controllers/autocomplete_search_controller.dart';
 import 'package:barikoi_maps_place_picker/src/barikoi_map_place_picker.dart';
@@ -14,51 +15,50 @@ import 'package:provider/provider.dart';
 import 'dart:io' show Platform;
 
 enum PinState { Preparing, Idle, Dragging }
+
 enum SearchingState { Idle, Searching }
 
 class PlacePicker extends StatefulWidget {
-  PlacePicker({
-    Key? key,
-    required this.apiKey,
-    this.onPlacePicked,
-    required this.initialPosition,
-    this.useCurrentLocation=true,
-    this.desiredLocationAccuracy = LocationAccuracy.high,
-    this.onMapCreated,
-    this.hintText,
-    this.searchingText,
-    // this.searchBarHeight,
-    // this.contentPadding,
-    this.onAutoCompleteFailed,
-    this.onGeocodingSearchFailed,
-    this.proxyBaseUrl,
-    this.httpClient,
-    this.selectedPlaceWidgetBuilder,
-    this.pinBuilder,
-    this.autoCompleteDebounceInMilliseconds = 300,
-    this.cameraMoveDebounceInMilliseconds = 350,
-    this.enableMapTypeButton = true,
-    this.enableMyLocationButton = true,
-    this.myLocationButtonCooldown = 3,
-    this.usePinPointingSearch = true,
-    this.usePlaceDetailSearch = false,
-    this.autocompleteOffset,
-    this.autocompleteRadius,
-    this.autocompleteLanguage,
-    //this.autocompleteComponents,
-    this.autocompleteTypes,
-    this.strictbounds,
-    this.region,
-    this.selectInitialPosition = false,
-    this.resizeToAvoidBottomInset = true,
-    this.initialSearchString,
-    this.searchForInitialValue = false,
-    this.forceAndroidLocationManager = false,
-    this.forceSearchOnZoomChanged = false,
-    this.automaticallyImplyAppBarLeading = true,
-    this.autocompleteOnTrailingWhitespace = false,
-    this.hidePlaceDetailsWhenDraggingPin = true
-  }) : super(key: key);
+  PlacePicker(
+      {Key? key,
+      required this.apiKey,
+      required this.onPlacePicked,
+      required this.initialPosition,
+      this.useCurrentLocation = true,
+      this.desiredLocationAccuracy = LocationAccuracy.high,
+      this.onMapCreated,
+      this.hintText,
+      this.searchingText,
+      this.onAutoCompleteFailed,
+      this.onGeocodingSearchFailed,
+      this.proxyBaseUrl,
+      this.httpClient,
+      this.selectedPlaceWidgetBuilder,
+      this.pinBuilder,
+      this.autoCompleteDebounceInMilliseconds = 300,
+      this.cameraMoveDebounceInMilliseconds = 350,
+      this.enableMapTypeButton = true,
+      this.enableMyLocationButton = true,
+      this.myLocationButtonCooldown = 3,
+      this.usePinPointingSearch = true,
+      this.usePlaceDetailSearch = false,
+      this.autocompleteOffset,
+      this.autocompleteRadius,
+      this.autocompleteLanguage,
+      this.autocompleteTypes,
+      this.getAdditionalPlaceData = const [],
+      this.strictbounds,
+      this.region,
+      this.selectInitialPosition = false,
+      this.resizeToAvoidBottomInset = true,
+      this.initialSearchString,
+      this.searchForInitialValue = false,
+      this.forceAndroidLocationManager = false,
+      this.forceSearchOnZoomChanged = false,
+      this.automaticallyImplyAppBarLeading = true,
+      this.autocompleteOnTrailingWhitespace = false,
+      this.hidePlaceDetailsWhenDraggingPin = true})
+      : super(key: key);
 
   final String apiKey;
 
@@ -72,7 +72,7 @@ class PlacePicker extends StatefulWidget {
   final String? searchingText;
   // final double searchBarHeight;
   // final EdgeInsetsGeometry contentPadding;
-
+  final List<PlaceDetails> getAdditionalPlaceData;
   final ValueChanged<String?>? onAutoCompleteFailed;
   final ValueChanged<String?>? onGeocodingSearchFailed;
   final int autoCompleteDebounceInMilliseconds;
@@ -89,7 +89,6 @@ class PlacePicker extends StatefulWidget {
   final num? autocompleteRadius;
   final String? autocompleteLanguage;
   final List<String>? autocompleteTypes;
-  //final List<Component> autocompleteComponents;
   final bool? strictbounds;
   final String? region;
 
@@ -110,7 +109,7 @@ class PlacePicker extends StatefulWidget {
   ///
   /// If you managed to use your own [selectedPlaceWidgetBuilder], then this WILL NOT be invoked, and you need use data which is
   /// being sent with [selectedPlaceWidgetBuilder].
-  final ValueChanged<PickResult>? onPlacePicked;
+  final ValueChanged<PickResult> onPlacePicked;
 
   /// optional - builds selected place's UI
   ///
@@ -240,7 +239,6 @@ class _PlacePickerState extends State<PlacePicker> {
                 _pickPrediction(prediction);
               },
               onSearchFailed: (status) {
-
                 if (widget.onAutoCompleteFailed != null) {
                   widget.onAutoCompleteFailed!(status);
                 }
@@ -248,7 +246,6 @@ class _PlacePickerState extends State<PlacePicker> {
               autocompleteOffset: widget.autocompleteOffset,
               autocompleteRadius: widget.autocompleteRadius,
               autocompleteLanguage: widget.autocompleteLanguage,
-
               autocompleteTypes: widget.autocompleteTypes,
               strictbounds: widget.strictbounds,
               region: widget.region,
@@ -331,16 +328,16 @@ class _PlacePickerState extends State<PlacePicker> {
     //         }
     //       });
     // } else {
-      return FutureBuilder(
-        future: Future.delayed(Duration(milliseconds: 1)),
-        builder: (context, snap) {
-          if (snap.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else {
-            return _buildMap(widget.initialPosition);
-          }
-        },
-      );
+    return FutureBuilder(
+      future: Future.delayed(Duration(milliseconds: 1)),
+      builder: (context, snap) {
+        if (snap.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          return _buildMap(widget.initialPosition);
+        }
+      },
+    );
     // }
   }
 
@@ -358,12 +355,12 @@ class _PlacePickerState extends State<PlacePicker> {
       useCurrentLocation: widget.useCurrentLocation,
       usePinPointingSearch: widget.usePinPointingSearch,
       usePlaceDetailSearch: widget.usePlaceDetailSearch,
+      getAdditionalPlaceData: widget.getAdditionalPlaceData,
       onMapCreated: widget.onMapCreated,
       selectInitialPosition: widget.selectInitialPosition,
       language: widget.autocompleteLanguage,
       forceSearchOnZoomChanged: widget.forceSearchOnZoomChanged,
       hidePlaceDetailsWhenDraggingPin: widget.hidePlaceDetailsWhenDraggingPin,
-
       onMyLocation: () async {
         // Prevent to click many times in short period.
         if (provider!.isOnUpdateLocationCooldown == false) {
@@ -372,7 +369,8 @@ class _PlacePickerState extends State<PlacePicker> {
             provider!.isOnUpdateLocationCooldown = false;
           });
           provider!
-              .updateCurrentLocation(widget.forceAndroidLocationManager).then((value) => _moveToCurrentPosition());
+              .updateCurrentLocation(widget.forceAndroidLocationManager)
+              .then((value) => _moveToCurrentPosition());
         }
       },
       onMoveStart: () {

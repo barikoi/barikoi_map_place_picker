@@ -3,9 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:barikoi_maps_place_picker/barikoi_maps_place_picker.dart';
 //import 'package:barikoi_maps_flutter/barikoi_maps_flutter.dart';
-import 'package:maplibre_gl/mapbox_gl.dart';
 // Your api key storage.
-
 
 void main() => runApp(MyApp());
 
@@ -70,26 +68,34 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               ElevatedButton(
-                child: Text("Load Barikoi Map"),
+                child: Text("Load Barikoi Place Picker"),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) {
                         return PlacePicker(
-                          apiKey: "BARIKOI_API_KEY_HERE",
-                          initialPosition: HomePage.kInitialPosition,
+                          apiKey: "MTI6SFpDRkoyN0NFOA==",
+                          initialPosition: LatLng(23.8567844, 90.213108),
                           useCurrentLocation: true,
                           selectInitialPosition: true,
                           usePinPointingSearch: true,
+                          getAdditionalPlaceData: [
+                            PlaceDetails.area_components
+                          ],
                           onPlacePicked: (result) {
                             selectedPlace = result;
-                            log("place ucode: "+result.toString());
+                            log("place ucode: " +
+                                result.toString() +
+                                " sub_area: " +
+                                (selectedPlace.area_comps?.subArea ?? ""));
 
                             Navigator.of(context).pop();
                             setState(() {});
                           },
-
+                          onAutoCompleteFailed: (status) {
+                            print(status);
+                          },
                           //forceSearchOnZoomChanged: true,
                           automaticallyImplyAppBarLeading: false,
                           //autocompleteLanguage: "ko",
@@ -130,7 +136,13 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              selectedPlace == null ? Container() : Text(selectedPlace.formattedAddress ?? ""),
+              selectedPlace == null
+                  ? Container()
+                  : Text((selectedPlace.formattedAddress ?? "") +
+                      " " +
+                      (selectedPlace.area_comps.subArea ?? "") +
+                      " " +
+                      (selectedPlace.area_comps.area ?? "")),
             ],
           ),
         ));
