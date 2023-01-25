@@ -50,6 +50,7 @@ PlacePicker(
     useCurrentLocation: true, // option to use the current location for picking a place, true by default
     selectInitialPosition: true, //option to load the initial position to start the map with
     usePinPointingSearch: true,  //option to use reversegeo api to get place from location point, default value is true
+    getAdditionalPlaceData: [ PlaceDetails.area_components, PlaceDetails.addr_components, PlaceDetails.district ] //option to retrive addtional place data, will count extra api calls
     onPlacePicked: (result) {   //returns the place object selected in the place picker 
     selectedPlace = result;
     },

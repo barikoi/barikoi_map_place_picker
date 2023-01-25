@@ -75,13 +75,15 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(
                       builder: (context) {
                         return PlacePicker(
-                          apiKey: "MTI6SFpDRkoyN0NFOA==",
+                          apiKey: "API_KEY_HERE",
                           initialPosition: LatLng(23.8567844, 90.213108),
                           useCurrentLocation: true,
                           selectInitialPosition: true,
                           usePinPointingSearch: true,
                           getAdditionalPlaceData: [
-                            PlaceDetails.area_components
+                            PlaceDetails.area_components,
+                            PlaceDetails.addr_components,
+                            PlaceDetails.district
                           ],
                           onPlacePicked: (result) {
                             selectedPlace = result;
