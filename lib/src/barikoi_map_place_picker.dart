@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:barikoi_api/barikoi_api.dart';
-import 'package:barikoi_maps_place_picker/src/models/place_details.dart';
 import 'package:dio/src/response.dart';
 import 'package:flutter/material.dart';
 import 'package:maplibre_gl/mapbox_gl.dart';
@@ -162,9 +161,9 @@ class BarikoiMapPlacePicker extends StatelessWidget {
               this.apikey,
       initialCameraPosition: CameraPosition(target: initialTarget, zoom: 16),
       myLocationRenderMode: MyLocationRenderMode.NORMAL,
-      compassEnabled: true,
+      compassEnabled: false,
       zoomGesturesEnabled: true,
-      myLocationEnabled: true,
+      myLocationEnabled: false,
       onMapCreated: (MaplibreMapController controller) {
         provider.mapController = controller;
         provider.setCameraPosition(null);

@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   static final kInitialPosition = LatLng(23.8567844, 90.213108);
 
@@ -54,7 +54,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  PickResult selectedPlace;
+  PickResult? selectedPlace;
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                     MaterialPageRoute(
                       builder: (context) {
                         return PlacePicker(
-                          apiKey: "API_KEY_HERE",
+                          apiKey: "BARIKOI_API_KEY_HERE",
                           initialPosition: LatLng(23.8567844, 90.213108),
                           useCurrentLocation: true,
                           selectInitialPosition: true,
@@ -90,7 +90,7 @@ class _HomePageState extends State<HomePage> {
                             log("place ucode: " +
                                 result.toString() +
                                 " sub_area: " +
-                                (selectedPlace.area_comps?.subArea ?? ""));
+                                (selectedPlace?.areaComps?.subArea ?? ""));
 
                             Navigator.of(context).pop();
                             setState(() {});
@@ -140,11 +140,11 @@ class _HomePageState extends State<HomePage> {
               ),
               selectedPlace == null
                   ? Container()
-                  : Text((selectedPlace.formattedAddress ?? "") +
+                  : Text((selectedPlace?.formattedAddress ?? "") +
                       " " +
-                      (selectedPlace.area_comps.subArea ?? "") +
+                      (selectedPlace?.areaComps?.subArea ?? "") +
                       " " +
-                      (selectedPlace.area_comps.area ?? "")),
+                      (selectedPlace?.areaComps?.area ?? "")),
             ],
           ),
         ));

@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:barikoi_api/barikoi_api.dart';
-import 'package:barikoi_maps_place_picker/src/models/place_details.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+// import 'package:geolocator/geolocator.dart';
 import 'package:maplibre_gl/mapbox_gl.dart';
 import 'package:barikoi_maps_place_picker/barikoi_maps_place_picker.dart';
 import 'package:barikoi_maps_place_picker/src/providers/place_provider.dart';
@@ -25,7 +24,7 @@ class PlacePicker extends StatefulWidget {
       required this.onPlacePicked,
       required this.initialPosition,
       this.useCurrentLocation = true,
-      this.desiredLocationAccuracy = LocationAccuracy.high,
+      // this.desiredLocationAccuracy = LocationAccuracy.high,
       this.onMapCreated,
       this.hintText,
       this.searchingText,
@@ -64,7 +63,7 @@ class PlacePicker extends StatefulWidget {
 
   final LatLng initialPosition;
   final bool useCurrentLocation;
-  final LocationAccuracy desiredLocationAccuracy;
+  // final LocationAccuracy desiredLocationAccuracy;
 
   final MapCreatedCallback? onMapCreated;
 
@@ -177,7 +176,7 @@ class _PlacePickerState extends State<PlacePicker> {
     provider =
         PlaceProvider(widget.apiKey, widget.proxyBaseUrl, widget.httpClient);
 
-    provider!.desiredAccuracy = widget.desiredLocationAccuracy;
+    //provider!.desiredAccuracy = widget.desiredLocationAccuracy;
   }
 
   @override

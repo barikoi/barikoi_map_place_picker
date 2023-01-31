@@ -36,7 +36,6 @@ class PlaceProvider extends ChangeNotifier {
       bool forceAndroidLocationManager) async {
     try {
       LocationPermission value = await Geolocator.checkPermission();
-
       if (value == LocationPermission.whileInUse ||
           value == LocationPermission.always) {
         currentPosition = await Geolocator.getCurrentPosition(

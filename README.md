@@ -10,6 +10,7 @@ dependencies:
       url: https://github.com/barikoi/barikoi_map_place_picker.git
       ref: main
 ```
+instead of main you can specify the specific commit that works for you
 
 ### Local
 To use the package in your local drive, please include the following in pubspec.yaml
@@ -53,6 +54,7 @@ PlacePicker(
     getAdditionalPlaceData: [ PlaceDetails.area_components, PlaceDetails.addr_components, PlaceDetails.district ] //option to retrive addtional place data, will count extra api calls
     onPlacePicked: (result) {   //returns the place object selected in the place picker 
     selectedPlace = result;
+    
     },
 );
 ```

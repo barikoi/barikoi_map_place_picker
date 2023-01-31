@@ -12,11 +12,11 @@ class PickResult {
     this.pType,
     this.uCode,
     this.union,
-    this.sub_district,
+    this.subDistrict,
     this.district,
     this.division,
-    this.area_comps,
-    this.addr_comps,
+    this.areaComps,
+    this.addrComps,
   });
 
   final int? placeId;
@@ -25,15 +25,15 @@ class PickResult {
   final String? area;
   final String? formattedAddress;
   final String? city;
-  final int? postCode;
-  final String? pType;
-  final String? uCode;
-  final String? union;
-  final String? sub_district;
-  final String? district;
-  final String? division;
-  final AreaComponents? area_comps;
-  final AddressComponents? addr_comps;
+  int? postCode;
+  String? pType;
+  String? uCode;
+  String? union;
+  String? subDistrict;
+  String? district;
+  String? division;
+  AreaComponents? areaComps;
+  AddressComponents? addrComps;
 
   factory PickResult.fromGeocodingResult(Place result) {
     return PickResult(
@@ -43,11 +43,11 @@ class PickResult {
         city: result.city,
         uCode: result.uCode,
         union: result.union,
-        sub_district: result.subDistrict,
+        subDistrict: result.subDistrict,
         district: result.subDistrict,
         division: result.division,
-        area_comps: result.areaComponents,
-        addr_comps: result.addressComponents);
+        areaComps: result.areaComponents,
+        addrComps: result.addressComponents);
   }
 
   factory PickResult.fromPlaceDetailResult(Place result) {
