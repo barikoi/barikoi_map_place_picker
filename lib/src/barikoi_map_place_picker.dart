@@ -180,7 +180,6 @@ class BarikoiMapPlacePicker extends StatelessWidget {
       },
 
       trackCameraPosition: true,
-
       onCameraIdle: () {
         log("camera movement stopped");
         if (provider.isSearchBarFocused) {

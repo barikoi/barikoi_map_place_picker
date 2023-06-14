@@ -9,7 +9,6 @@ import 'package:barikoi_maps_place_picker/src/providers/place_provider.dart';
 import 'package:barikoi_maps_place_picker/src/autocomplete_search.dart';
 import 'package:barikoi_maps_place_picker/src/controllers/autocomplete_search_controller.dart';
 import 'package:barikoi_maps_place_picker/src/barikoi_map_place_picker.dart';
-import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'dart:io' show Platform;
 
@@ -30,8 +29,6 @@ class PlacePicker extends StatefulWidget {
       this.searchingText,
       this.onAutoCompleteFailed,
       this.onGeocodingSearchFailed,
-      this.proxyBaseUrl,
-      this.httpClient,
       this.selectedPlaceWidgetBuilder,
       this.pinBuilder,
       this.autoCompleteDebounceInMilliseconds = 300,
@@ -56,7 +53,7 @@ class PlacePicker extends StatefulWidget {
       this.forceSearchOnZoomChanged = false,
       this.automaticallyImplyAppBarLeading = true,
       this.autocompleteOnTrailingWhitespace = false,
-      this.hidePlaceDetailsWhenDraggingPin = true})
+      this.hidePlaceDetailsWhenDraggingPin = true, this.proxyBaseUrl})
       : super(key: key);
 
   final String apiKey;
@@ -128,11 +125,7 @@ class PlacePicker extends StatefulWidget {
   /// (Not storing the apiKey in the app is good practice)
   final String? proxyBaseUrl;
 
-  /// optional - set 'client' value in barikoi_maps_webservice
-  ///
-  /// In case of using a proxy url that requires authentication
-  /// or custom configuration
-  final BaseClient? httpClient;
+
 
   /// Initial value of autocomplete search
   final String? initialSearchString;
@@ -174,7 +167,7 @@ class _PlacePickerState extends State<PlacePicker> {
     super.initState();
 
     provider =
-        PlaceProvider(widget.apiKey, widget.proxyBaseUrl, widget.httpClient);
+        PlaceProvider(widget.apiKey);
 
     //provider!.desiredAccuracy = widget.desiredLocationAccuracy;
   }
@@ -259,7 +252,7 @@ class _PlacePickerState extends State<PlacePicker> {
   }
 
   _pickPrediction(Place prediction) async {
-    provider!.placeSearchingState = SearchingState.Searching;
+    // provider!.placeSearchingState = SearchingState.Searching;
 
     /*final PlacesDetailsResponse response =
         await provider.bkoiplace.getDetailsByPlaceId(

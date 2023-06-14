@@ -44,7 +44,7 @@ class PickResult {
         uCode: result.uCode,
         union: result.union,
         subDistrict: result.subDistrict,
-        district: result.subDistrict,
+        district: result.district,
         division: result.division,
         areaComps: result.areaComponents,
         addrComps: result.addressComponents);
