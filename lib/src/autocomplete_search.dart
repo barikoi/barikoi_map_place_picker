@@ -328,6 +328,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
   clearText() {
     provider.searchTerm = "";
     controller.clear();
+    focus.unfocus();
   }
 
   resetSearchBar() {

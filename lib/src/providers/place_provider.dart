@@ -7,12 +7,11 @@ import 'package:barikoi_maps_place_picker/src/autocomplete_search.dart';
 import 'dart:developer';
 import 'package:barikoi_maps_place_picker/src/models/pick_result.dart';
 import 'package:barikoi_maps_place_picker/src/place_picker.dart';
-import 'package:http/http.dart';
 import 'package:maplibre_gl/mapbox_gl.dart';
 import 'package:provider/provider.dart';
 
 class PlaceProvider extends ChangeNotifier {
-  PlaceProvider(String apiKey, String? proxyBaseUrl, Client? httpClient) {
+  PlaceProvider(String apiKey) {
     /*geocoding = BarikoiMapsGeocoding(
       apiKey: apiKey,
       baseUrl: proxyBaseUrl,
