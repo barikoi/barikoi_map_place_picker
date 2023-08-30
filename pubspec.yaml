@@ -1,6 +1,6 @@
 name: barikoi_maps_place_picker
 description: A Flutter plugin which provides 'Picking Place' using Barikoi Maps widget.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/barikoi/barikoi_maps_place_picker
 
 publish_to: none
@@ -10,7 +10,7 @@ analyzer:
     - non-nullable
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=3.1.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -18,10 +18,10 @@ dependencies:
   barikoi_api:
     git:
       url: https://github.com/barikoi/barikoi_api_dartlib.git
-      ref: 2cec4dbfb86c8d5ad61effdea183bf9d5e3a6349
+      ref: 166120a09bbebef3fcb68002e7e90a7e8739c346
   maplibre_gl:
     git:
-      url: https://github.com/m0nac0/flutter-maplibre-gl.git
+      url: https://github.com/maplibre/flutter-maplibre-gl.git
       ref: 0.16.0
 #  mapbox_gl:  ^0.11.0
   geolocator: ^9.0.1
