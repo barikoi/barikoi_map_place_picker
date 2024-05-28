@@ -21,7 +21,7 @@ dependencies:
 ```
 
 ## Getting Started
-For iOS platform, go to your projects ios folder and add these lines to your pod file :  
+For iOS platform, the following codes are no loger needed to be added in your pod file, if you have already used the previous version of this library please remove the following lines from your pod file:  
 ```
 source 'https://cdn.cocoapods.org/'
 source 'https://github.com/m0nac0/flutter-maplibre-podspecs.git'
