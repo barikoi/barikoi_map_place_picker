@@ -41,10 +41,7 @@ dev_dependencies:
 
 dependency_overrides:
   permission_handler: ^8.3.0
-  json_serializable: '6.2.0'
-  analyzer: '4.1.0'
-  dio: ^4.0.0
-  geolocator: ^8.0.5
+  geolocator: ^12.0.0
     # analyzer: '4.1.0'
 
 # For information on the generic Dart part of this file, see the

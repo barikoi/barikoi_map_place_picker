@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:barikoi_api/barikoi_api.dart';
 import 'package:dio/src/response.dart';
 import 'package:flutter/material.dart';
-import 'package:maplibre_gl/mapbox_gl.dart';
+import 'package:maplibre_gl/maplibre_gl.dart';
 
 import 'package:barikoi_maps_place_picker/barikoi_maps_place_picker.dart';
 import 'package:barikoi_maps_place_picker/src/providers/place_provider.dart';
