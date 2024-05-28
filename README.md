@@ -8,7 +8,8 @@ dependencies:
   barikoi_maps_place_picker:
     git: 
       url: https://github.com/barikoi/barikoi_map_place_picker.git
-      ref: main
+      ref: main 
+      #or specific commit
 ```
 instead of main you can specify the specific commit that works for you
 
@@ -21,7 +22,7 @@ dependencies:
 ```
 
 ## Getting Started
-For iOS platform, the following codes are no loger needed to be added in your pod file, if you have already used the previous version of this library please remove the following lines from your pod file:  
+For iOS platform, the following codes are no longer needed to be added in your pod file, if you have already used the previous version of this library please remove the following lines from your pod file:  
 ```
 source 'https://cdn.cocoapods.org/'
 source 'https://github.com/m0nac0/flutter-maplibre-podspecs.git'
