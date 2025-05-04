@@ -155,16 +155,16 @@ class BarikoiMapPlacePicker extends StatelessWidget {
     PlaceProvider provider = PlaceProvider.of(context, listen: false);
     CameraPosition initialCameraPosition =
         CameraPosition(target: initialTarget, zoom: 16);
-    return MaplibreMap(
+    return MapLibreMap(
       styleString:
           "https://map.barikoi.com/styles/osm-liberty/style.json?key=" +
               this.apikey,
       initialCameraPosition: CameraPosition(target: initialTarget, zoom: 16),
-      myLocationRenderMode: MyLocationRenderMode.NORMAL,
+      myLocationRenderMode: MyLocationRenderMode.normal,
       compassEnabled: false,
       zoomGesturesEnabled: true,
       myLocationEnabled: false,
-      onMapCreated: (MaplibreMapController controller) {
+      onMapCreated: (MapLibreMapController controller) {
         provider.mapController = controller;
         provider.setCameraPosition(null);
         provider.pinState = PinState.Idle;
