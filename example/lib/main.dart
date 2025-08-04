@@ -132,6 +132,8 @@ class _HomePageState extends State<HomePage> {
                           //     return Icon(Icons.favorite);
                           //   }
                           // },
+                          matchTextColor: Colors.green,
+                          unMatchedTextColor: Colors.black54,
                         );
                       },
                     ),

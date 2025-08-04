@@ -31,7 +31,10 @@ class AutoCompleteSearch extends StatefulWidget {
       this.region,
       this.initialSearchString,
       this.searchForInitialValue,
-      this.autocompleteOnTrailingWhitespace})
+      this.autocompleteOnTrailingWhitespace,
+      this.matchTextColor,
+      this.unMatchedTextColor
+      })
       : super(key: key);
 
   final String? hintText;
@@ -53,6 +56,8 @@ class AutoCompleteSearch extends StatefulWidget {
   final String? initialSearchString;
   final bool? searchForInitialValue;
   final bool? autocompleteOnTrailingWhitespace;
+  final Color? matchTextColor;
+  final Color? unMatchedTextColor;
 
   @override
   AutoCompleteSearchState createState() => AutoCompleteSearchState();
@@ -279,16 +284,20 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
     );
   }
 
-  Widget _buildPredictionOverlay(List<Place> predictions) {
+  Widget _buildPredictionOverlay(List<Place> predictions, String searchText) {
     return ListBody(
       children: predictions
           .map(
             (p) => PredictionTile(
               prediction: p,
+              searchText: searchText,
               onTap: (selectedPrediction) {
                 resetSearchBar();
                 widget.onPicked(selectedPrediction);
               },
+              // Pass the colors from widget properties, or let PredictionTile handle null values
+              matchTextColor: widget.matchTextColor,
+              unMatchedTextColor: widget.unMatchedTextColor,
             ),
           )
           .toList(),
@@ -303,7 +312,7 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
       response.then((value) {
         if (value.data!.places!.isNotEmpty)
           _displayOverlay(
-              _buildPredictionOverlay(List.from(value.data!.places!)));
+              _buildPredictionOverlay(List.from(value.data!.places!), searchTerm));
         else {
           _displayOverlay(_buildNotFoundOverlay());
           widget.onSearchFailed!(value.statusMessage);
@@ -312,16 +321,6 @@ class AutoCompleteSearchState extends State<AutoCompleteSearch> {
         _displayOverlay(_buildNotFoundOverlay());
         widget.onSearchFailed!(error.toString());
       });
-
-      /*if (response.statusCode !=200) {
-        print("AutoCompleteSearch Error: " + response.statusMessage);
-        if (widget.onSearchFailed != null) {
-          widget.onSearchFailed(response.statusMessage);
-        }
-        return;
-      }
-
-      _displayOverlay(_buildPredictionOverlay(List.from(response.data.places)));*/
     }
   }
 

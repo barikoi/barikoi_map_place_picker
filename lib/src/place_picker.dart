@@ -53,7 +53,10 @@ class PlacePicker extends StatefulWidget {
       this.forceSearchOnZoomChanged = false,
       this.automaticallyImplyAppBarLeading = true,
       this.autocompleteOnTrailingWhitespace = false,
-      this.hidePlaceDetailsWhenDraggingPin = true, this.proxyBaseUrl})
+      this.hidePlaceDetailsWhenDraggingPin = true, this.proxyBaseUrl,
+      this.matchTextColor,
+      this.unMatchedTextColor
+      })
       : super(key: key);
 
   final String apiKey;
@@ -153,6 +156,9 @@ class PlacePicker extends StatefulWidget {
 
   final bool hidePlaceDetailsWhenDraggingPin;
 
+  final Color? matchTextColor;
+  final Color? unMatchedTextColor;
+
   @override
   _PlacePickerState createState() => _PlacePickerState();
 }
@@ -210,6 +216,9 @@ class _PlacePickerState extends State<PlacePicker> {
   }
 
   Widget _buildSearchBar() {
+    print("+++++++++++++++++++++++++");
+    print(widget.matchTextColor);
+    print(widget.unMatchedTextColor);
     return Row(
       children: <Widget>[
         widget.automaticallyImplyAppBarLeading
@@ -244,7 +253,10 @@ class _PlacePickerState extends State<PlacePicker> {
               initialSearchString: widget.initialSearchString,
               searchForInitialValue: widget.searchForInitialValue,
               autocompleteOnTrailingWhitespace:
-                  widget.autocompleteOnTrailingWhitespace),
+                  widget.autocompleteOnTrailingWhitespace,
+                  matchTextColor: widget.matchTextColor,
+              unMatchedTextColor: widget.unMatchedTextColor,
+                  ),
         ),
         SizedBox(width: 5),
       ],
