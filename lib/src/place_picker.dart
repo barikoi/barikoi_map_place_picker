@@ -53,10 +53,10 @@ class PlacePicker extends StatefulWidget {
       this.forceSearchOnZoomChanged = false,
       this.automaticallyImplyAppBarLeading = true,
       this.autocompleteOnTrailingWhitespace = false,
-      this.hidePlaceDetailsWhenDraggingPin = true, this.proxyBaseUrl,
+      this.hidePlaceDetailsWhenDraggingPin = true,
+      this.proxyBaseUrl,
       this.matchTextColor,
-      this.unMatchedTextColor
-      })
+      this.unMatchedTextColor})
       : super(key: key);
 
   final String apiKey;
@@ -128,8 +128,6 @@ class PlacePicker extends StatefulWidget {
   /// (Not storing the apiKey in the app is good practice)
   final String? proxyBaseUrl;
 
-
-
   /// Initial value of autocomplete search
   final String? initialSearchString;
 
@@ -172,8 +170,7 @@ class _PlacePickerState extends State<PlacePicker> {
   void initState() {
     super.initState();
 
-    provider =
-        PlaceProvider(widget.apiKey);
+    provider = PlaceProvider(widget.apiKey);
 
     //provider!.desiredAccuracy = widget.desiredLocationAccuracy;
   }
@@ -231,32 +228,32 @@ class _PlacePickerState extends State<PlacePicker> {
             : SizedBox(width: 15),
         Expanded(
           child: AutoCompleteSearch(
-              appBarKey: appBarKey,
-              searchBarController: searchBarController,
-              hintText: widget.hintText,
-              searchingText: widget.searchingText,
-              debounceMilliseconds: widget.autoCompleteDebounceInMilliseconds,
-              onPicked: (prediction) {
-                _pickPrediction(prediction);
-              },
-              onSearchFailed: (status) {
-                if (widget.onAutoCompleteFailed != null) {
-                  widget.onAutoCompleteFailed!(status);
-                }
-              },
-              autocompleteOffset: widget.autocompleteOffset,
-              autocompleteRadius: widget.autocompleteRadius,
-              autocompleteLanguage: widget.autocompleteLanguage,
-              autocompleteTypes: widget.autocompleteTypes,
-              strictbounds: widget.strictbounds,
-              region: widget.region,
-              initialSearchString: widget.initialSearchString,
-              searchForInitialValue: widget.searchForInitialValue,
-              autocompleteOnTrailingWhitespace:
-                  widget.autocompleteOnTrailingWhitespace,
-                  matchTextColor: widget.matchTextColor,
-              unMatchedTextColor: widget.unMatchedTextColor,
-                  ),
+            appBarKey: appBarKey,
+            searchBarController: searchBarController,
+            hintText: widget.hintText,
+            searchingText: widget.searchingText,
+            debounceMilliseconds: widget.autoCompleteDebounceInMilliseconds,
+            onPicked: (prediction) {
+              _pickPrediction(prediction);
+            },
+            onSearchFailed: (status) {
+              if (widget.onAutoCompleteFailed != null) {
+                widget.onAutoCompleteFailed!(status);
+              }
+            },
+            autocompleteOffset: widget.autocompleteOffset,
+            autocompleteRadius: widget.autocompleteRadius,
+            autocompleteLanguage: widget.autocompleteLanguage,
+            autocompleteTypes: widget.autocompleteTypes,
+            strictbounds: widget.strictbounds,
+            region: widget.region,
+            initialSearchString: widget.initialSearchString,
+            searchForInitialValue: widget.searchForInitialValue,
+            autocompleteOnTrailingWhitespace:
+                widget.autocompleteOnTrailingWhitespace,
+            matchTextColor: widget.matchTextColor,
+            unMatchedTextColor: widget.unMatchedTextColor,
+          ),
         ),
         SizedBox(width: 5),
       ],
@@ -366,8 +363,12 @@ class _PlacePickerState extends State<PlacePicker> {
       forceSearchOnZoomChanged: widget.forceSearchOnZoomChanged,
       hidePlaceDetailsWhenDraggingPin: widget.hidePlaceDetailsWhenDraggingPin,
       onMyLocation: () async {
+        // Move camera to current position immediately if available, before waiting for updateCurrentLocation //
+        if (provider!.currentPosition != null) {
+          _moveToCurrentPosition();
+        }
         // Prevent to click many times in short period.
-        if (provider!.isOnUpdateLocationCooldown == false) {
+        else if (provider!.isOnUpdateLocationCooldown == false) {
           provider!.isOnUpdateLocationCooldown = true;
           Timer(Duration(seconds: widget.myLocationButtonCooldown), () {
             provider!.isOnUpdateLocationCooldown = false;
@@ -375,6 +376,8 @@ class _PlacePickerState extends State<PlacePicker> {
           provider!
               .updateCurrentLocation(widget.forceAndroidLocationManager)
               .then((value) => _moveToCurrentPosition());
+        } else {
+          _moveToCurrentPosition();
         }
       },
       onMoveStart: () {

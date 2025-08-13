@@ -395,8 +395,8 @@ class BarikoiMapPlacePicker extends StatelessWidget {
           SizedBox(height: 10),
           enableMyLocationButton!
               ? Container(
-                  width: 35,
-                  height: 35,
+                  width: 40,
+                  height: 40,
                   child: RawMaterialButton(
                     shape: CircleBorder(),
                     fillColor: Theme.of(context).brightness == Brightness.dark
@@ -404,7 +404,7 @@ class BarikoiMapPlacePicker extends StatelessWidget {
                         : Colors.white,
                     elevation: 8.0,
                     onPressed: onMyLocation,
-                    child: Icon(Icons.my_location),
+                    child: Icon(Icons.my_location, size: 20),
                   ),
                 )
               : Container(),
